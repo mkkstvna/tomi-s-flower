@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            width: 80%;
+            margin: auto;
+            align-items: center;
+        }
+        .gallery-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery img {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .gallery-item:nth-child(3) {
+            grid-column: 2 / 3;
+            grid-row: 1 / 3;
+        }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: none;
+        }
+        .gallery-item:hover .close-btn {
+            display: block;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+        .overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .overlay .close-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="c8d8ed49006ae4fc589c5e31fed473e4_enhanced.jpg" onclick="openOverlay(this.src)">
+        </div>
+        <div class="gallery-item">
+            <img src="bcc46ca736790158bdd3601f7a90dce0_enhanced.jpg" onclick="openOverlay(this.src)">
+        </div>
+        <div class="gallery-item">
+            <img src="db600b31e6c4f0e9e0e54391612ee5f7_enhanced.jpg" onclick="openOverlay(this.src)">
+        </div>
+        <div class="gallery-item">
+            <img src="de42a6a4370f00a9e0fec8c69f3fcbdb_enhanced.jpg" onclick="openOverlay(this.src)">
+        </div>
+        <div class="gallery-item">
+            <img src="eaadde299b80ac64946216d3fa229d35_enhanced.jpg" onclick="openOverlay(this.src)">
+        </div>
+    </div>
+
+    <div class="overlay" id="imageOverlay" onclick="closeOverlay()">
+        <button class="close-overlay">X</button>
+        <img id="overlayImage">
+    </div>
+
+    <script>
+        function openOverlay(src) {
+            document.getElementById('overlayImage').src = src;
+            document.getElementById('imageOverlay').classList.add('active');
+        }
+        
+        function closeOverlay() {
+            document.getElementById('imageOverlay').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
